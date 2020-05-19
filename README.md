@@ -1,4 +1,4 @@
-ansible-role-iptables-port-forward
+ansible-role-iptables-forward-port
 ==================================
 
 An ansible role that configures iptables for port forwarding.
@@ -26,13 +26,13 @@ Example Playbook
   hosts: localhost
   gather_facts: yes
   roles:
-  - name: bit_kitchen.iptables_port_forward
+  - name: bit_kitchen.iptables_forward_port
     self_addr: "{{ ansible_facts.eth0.ipv4.address }}"
     self_port: 80
     dest_addr: 10.20.30.40
     dest_port: 80
     protocol: tcp
-  - name: bit_kitchen.iptables_port_forward
+  - name: bit_kitchen.iptables_forward_port
     self_addr: "{{ ansible_facts.eth0.ipv4.address }}"
     self_port: 443
     dest_addr: 10.20.30.40

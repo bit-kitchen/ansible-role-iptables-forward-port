@@ -1,6 +1,6 @@
 galaxy_info:
   author: bit_kitchen
-  role_name: iptables_port_forward
+  role_name: iptables_forward_port
 
   description: Configures iptables for port forwarding
   license: MIT
