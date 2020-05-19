@@ -1,21 +1,21 @@
 ---
-- name: iptables -t nat -I PREROUTING -p {{ protocol }} --dport {{ self_port }} -j DNAT --to-destination {{ dest_addr }}:{{ dest_port }}
+- name: iptables -t nat -I PREROUTING -p {{ _protocol }} --dport {{ _self_port }} -j DNAT --to-destination {{ _dest_addr }}:{{ _dest_port }}
   iptables:
     table: nat
     action: insert
     chain: PREROUTING
-    protocol: "{{ protocol }}"
-    destination_port: "{{ self_port }}"
+    protocol: "{{ _protocol }}"
+    destination_port: "{{ _self_port }}"
     jump: DNAT
-    to_destination: "{{ dest_addr }}:{{ dest_port }}"
+    to_destination: "{{ _dest_addr }}:{{ _dest_port }}"
 
-- name: iptables -t nat -I POSTROUTING -p {{ protocol }} -d {{ dest_addr }} --dport {{ dest_port }} -j SNAT --to-source {{ self_addr }}
+- name: iptables -t nat -I POSTROUTING -p {{ _protocol }} -d {{ _dest_addr }} --dport {{ _dest_port }} -j SNAT --to-source {{ _self_addr }}
   iptables:
     table: nat
     action: insert
     chain: POSTROUTING
-    protocol: "{{ protocol }}"
-    destination: "{{ dest_addr }}"
-    destination_port: "{{ dest_port }}"
+    protocol: "{{ _protocol }}"
+    destination: "{{ _dest_addr }}"
+    destination_port: "{{ _dest_port }}"
     jump: SNAT
-    to_source: "{{ self_addr }}"
+    to_source: "{{ _self_addr }}"

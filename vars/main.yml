@@ -1,1 +1,6 @@
 ---
+_protocol: "{{ protocol | default('tcp', true) }}"
+_self_addr: "{{ self_addr | default(ansible_default_ipv4.address, true) }}"
+_dest_addr: "{{ dest_addr | default(_self_addr, true) }}"
+_self_port: "{{ self_port | default(dest_port, true) }}"
+_dest_port: "{{ dest_port | default(self_port, true) }}"
