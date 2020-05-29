@@ -1,2 +1,6 @@
 ---
 protocol: ""
+self_addr: ""
+self_port: ""
+dest_addr: ""
+dest_port: ""
