@@ -12,6 +12,7 @@
   loop: "{{ ['tcp', 'udp'] if protocol == '' else [protocol] }}"
   loop_control:
     loop_var: _protocol
+  notify: sysctl net.ipv4.ip_forward=1
   when: self_port != "" or dest_port != ""
 
 - name: Set up POSTROUTING rule
@@ -28,11 +29,5 @@
   loop: "{{ ['tcp', 'udp'] if protocol == '' else [protocol] }}"
   loop_control:
     loop_var: _protocol
-  when: self_port != "" or dest_port != ""
-
-- name: sysctl net.ipv4.ip_forward=1
-  sysctl:
-    name: net.ipv4.ip_forward
-    value: "1"
-    sysctl_set: yes
+  notify: sysctl net.ipv4.ip_forward=1
   when: self_port != "" or dest_port != ""
