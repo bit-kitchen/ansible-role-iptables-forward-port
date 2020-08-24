@@ -1,6 +1,7 @@
 ---
 - name: iptables -t nat -I PREROUTING -p {{ _protocol }} --dport {{ _self_port }} -j DNAT --to-destination {{ _dest_addr }}:{{ _dest_port }}
   iptables:
+    state: "{{ 'absent' if remove else 'present' }}"
     table: nat
     action: insert
     chain: PREROUTING
@@ -15,6 +16,7 @@
 
 - name: iptables -t nat -I POSTROUTING -p {{ _protocol }} -d {{ _dest_addr }} --dport {{ _dest_port }} -j SNAT --to-source {{ _self_addr }}
   iptables:
+    state: "{{ 'absent' if remove else 'present' }}"
     table: nat
     action: insert
     chain: POSTROUTING

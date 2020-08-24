@@ -1,4 +1,5 @@
 ---
+remove: false
 protocol: ""
 self_addr: ""
 self_port: ""
