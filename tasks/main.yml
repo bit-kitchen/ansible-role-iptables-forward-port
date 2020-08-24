@@ -1,5 +1,5 @@
 ---
-- name: iptables -t nat -I PREROUTING -p {{ _protocol }} --dport {{ _self_port }} -j DNAT --to-destination {{ _dest_addr }}:{{ _dest_port }}
+- name: Set up PREROUTING rule
   iptables:
     state: "{{ 'absent' if remove else 'present' }}"
     table: nat
@@ -14,7 +14,7 @@
     loop_var: _protocol
   when: self_port != "" or dest_port != ""
 
-- name: iptables -t nat -I POSTROUTING -p {{ _protocol }} -d {{ _dest_addr }} --dport {{ _dest_port }} -j SNAT --to-source {{ _self_addr }}
+- name: Set up POSTROUTING rule
   iptables:
     state: "{{ 'absent' if remove else 'present' }}"
     table: nat
